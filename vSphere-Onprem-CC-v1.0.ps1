@@ -21,7 +21,6 @@
 	Requires -RunAsAdministrator (or elevated PowerShell session)
 	Requires existing domain controller (powered on!)
 	Requires a Citrix Cloud API key see --> https://docs.citrix.com/en-us/citrix-cloud/citrix-cloud-management/identity-access-management.html
-	Requires Active Directory on Azure or Site to Site connectivity between Azure and on-premises
 
 .NOTES
 	NAME: vSphere-Onprem-CC-v1.0.ps1

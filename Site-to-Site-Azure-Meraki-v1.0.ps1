@@ -11,9 +11,6 @@
 	At the end of the Azure configuration you will have 5 minutes to configure on-premises Meraki before validation occurs.
 		
 	Requires -RunAsAdministrator (or elevated PowerShell session)
-	Requires existing domain controller (powered on!)
-	Requires a Citrix Cloud API key see --> https://docs.citrix.com/en-us/citrix-cloud/citrix-cloud-management/identity-access-management.html
-	Requires Active Directory on Azure or Site to Site connectivity between Azure and on-premises
 
 .NOTES
 	NAME: Site-to-Site-Azure-Meraki-v1.0.ps1
