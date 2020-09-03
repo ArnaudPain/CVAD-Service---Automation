@@ -1,4 +1,45 @@
-﻿# SET VARIABLES ----------------
+﻿#Requires -Version 5.0
+#This File is in Unicode format. Do not edit in an ASCII editor. Notepad++ UTF-8-BOM
+
+#region help text
+
+<#
+.SYNOPSIS
+	Deploy 2 Windows Server on vSphere or ESX, domain join and deploy Citrix Cloud Connector
+.DESCRIPTION
+	The script will create Resource Location in Citrix Cloud.
+	It will ask you for:
+	 Name of the Template
+	 Name of the customization file
+	 Name of each server to deploy
+	 
+	When VMs are deployed they will be domain-joined
+	Then Citrix Cloud Connector software is downloaded from my ShareFile FTP and deployed
+	
+	You need to have on your C:\ drive the "linked" script remote-cc.ps1
+	
+	Requires -RunAsAdministrator (or elevated PowerShell session)
+	Requires existing domain controller (powered on!)
+	Requires a Citrix Cloud API key see --> https://docs.citrix.com/en-us/citrix-cloud/citrix-cloud-management/identity-access-management.html
+	Requires Active Directory on Azure or Site to Site connectivity between Azure and on-premises
+
+.NOTES
+	NAME: remote-cc.ps1
+	VERSION: 1.00
+	AUTHOR: Arnaud Pain
+	LASTEDIT: September 3, 2020
+#>
+#endregion
+
+# VARIABLES TO BE SET BEFORE RUNNING THE SCRIPT
+# Citrix Cloud credentials
+ $CustomerID = "" # To be filled before running the script
+ $ClientID = "" # To be filled before running the script
+ $ClientSecret = "" # To be filled before running the script
+
+# Citrix Cloud Information
+    $CTX_Resource_Location_Name = "" # To be filled before running the script
+
 # FTP Variables
     $Username = "arnaudpain/ftp@arnaud.biz"
     $Password = "9$<rZK-k"
@@ -24,17 +65,9 @@ $LocalFileFile.Close()
 
 # Enable TLS 1.2
     [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-# -------------------------------
 
-# Citrix Cloud credentials
- $CustomerID = "2g60i8n7zhxd" #To be filled before running the script
- $ClientID = "d03d1473-cc68-4486-9bf3-02d7c7f455a0" #To be filled before running the script
- $ClientSecret = "t8m5YuezfTxyo8JvBppuCw==" #To be filled before running the script
 
-# Citrix Cloud Information
-    $CTX_Resource_Location_Name = "On-Premises"
-
-# SCRIPT ------------------------
+# MAIN SCRIPT
 # Citrix Cloud - Bearer Token
     Write-Host "1. Citrix Cloud - Get Bearer Token" -ForegroundColor Green
     $Body = @{
